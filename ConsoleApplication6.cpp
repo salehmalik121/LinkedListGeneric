@@ -11,7 +11,8 @@ node* createNode(int data, node* next) {
 	return nGeneral;
 }
 void display(node* head);
-node* RandomPositionEnter(node* , int);
+node* RandomPositionEnter(node*, int);
+node* RandomPostionDelete(node*, int);
 int main() {
 	node* head = NULL;
 	node* n = new node(10, NULL);
@@ -21,7 +22,7 @@ int main() {
 		  head = n;
 	  }
 	}
-	head = RandomPositionEnter(head, 10);
+	head = RandomPostionDelete(head, 6);
 	display(head);
 }
 void display(node* head) {
@@ -64,6 +65,34 @@ node* RandomPositionEnter(node* head , int pos) {
 				temp->next = endNode;
 				
 
+			}
+			return head;
+		}
+		tempP = temp;
+		temp = temp->next;
+	}
+}
+node* RandomPostionDelete(node* head, int pos) {
+	node* temp = head;
+	node* tempP = head;
+	for (int i = 1; i <= pos; i++) {
+		if (temp == NULL) {
+			cout << "Position doesnot exist";
+			break;
+		}
+		else if (i == pos) {
+			if (pos != 1 && temp->next!=NULL) {
+				tempP->next = temp->next;
+				free(temp);
+			}
+			else if (pos == 1) {
+				 head = temp->next;
+				 free(temp);
+			}
+			else if (temp->next == NULL)
+			{
+				tempP->next = NULL;
+				free(temp);
 			}
 			return head;
 		}
